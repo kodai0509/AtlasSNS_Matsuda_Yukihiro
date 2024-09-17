@@ -13,7 +13,9 @@
         "laravelcollective/html": "^6.4"
     },
     "require-dev": {
+        "caouecs/laravel-lang": "*",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/lang": "*",
         "laravel/breeze": "^1.19",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
