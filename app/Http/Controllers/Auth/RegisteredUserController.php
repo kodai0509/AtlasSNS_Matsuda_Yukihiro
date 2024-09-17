@@ -39,6 +39,7 @@ class RegisteredUserController extends Controller
             'password' =>['required','string','min:8','max:20','regex:/^[a-zA-Z0-9]+$/'],
             'password_confirmation' =>['required','string','min:8','max:20','same:password','regex:/^[a-zA-Z0-9]+$/'],
         ]);
+
         User::create([
             'username' => $request->username,
             'email' => $request->email,
