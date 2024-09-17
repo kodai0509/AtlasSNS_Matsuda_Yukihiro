@@ -40,5 +40,6 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::get('/added', [RegisteredUserController::class, 'added'])->name('added');
 
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
