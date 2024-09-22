@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PostsController;
-// use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -20,26 +20,32 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
-
-
 require __DIR__ . '/auth.php';
 
-Route::get('top',[PostsController::class, 'index']);
+// ミドルウェア設定//
+Route::middleware('auth')->group(function () {
+    Route::get('/protected-page', [YourController::class, 'showProtectedPage'])->name('protected-page');
 
+//トップページ
+Route::get('/added', [RegisteredUserController::class, 'added'])->name('added');
+
+// プロフィール画面
 Route::get('profile',[ProfileController::class, 'profile']);
 
+// 検索画面
 Route::get('search',[UsersController::class, 'index']);
 
-Route::get('follow-list',[PostsController::class, 'index']);
-Route::get('follower-list', [PostsController::class, 'index']);
+// フォロー・フォロワーリストページ
+Route::get('follow-list',[PostsController::class, 'followList']);
+Route::get('follower-list', [PostsController::class, 'followerList']);
 
-Route::post('register', [RegisteredUserController::class, 'register']);
+// 相手ユーザーのプロフィールページ
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+});
+
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
-
-Route::get('/added', [RegisteredUserController::class, 'added'])->name('added');
-
-
-Route::get('/login', [AuthenticatedSessionController::class, 'create']);
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
