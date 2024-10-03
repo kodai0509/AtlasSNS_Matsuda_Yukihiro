@@ -24,13 +24,12 @@ require __DIR__ . '/auth.php';
 
 // ミドルウェア設定//
 Route::middleware('auth')->group(function () {
-    Route::get('/protected-page', [YourController::class, 'showProtectedPage'])->name('protected-page');
 
 //トップページ
-Route::get('/added', [RegisteredUserController::class, 'added'])->name('added');
+Route::get('/index', [RegisteredUserController::class, 'index'])->name('index');
 
 // プロフィール画面
-Route::get('profile',[ProfileController::class, 'profile']);
+Route::get('profile',[ProfileController::class, 'profile'])->name('profiles.profile');
 
 // 検索画面
 Route::get('search',[UsersController::class, 'index']);
@@ -44,8 +43,10 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile
 
 });
 
-
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+// ログアウト//
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
