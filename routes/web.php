@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 Route::get('profile',[ProfileController::class, 'profile'])->name('profiles.profile');
 
 // 検索画面
-Route::get('search',[UsersController::class, 'search'])->name('search');
+Route::match(['get', 'post'], '/search', [UsersController::class, 'search'])->name('search');
 
 // フォロー・フォロワーリストページ
 Route::get('follow-list',[FollowsController::class, 'followList'])->name('follow.list');
