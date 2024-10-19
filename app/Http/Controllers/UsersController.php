@@ -25,4 +25,28 @@ class UsersController extends Controller
 
         return view('users.search',compact('users'));
     }
+
+    // フォロー機能
+    public function follow(User $user)
+    {
+        $follower = auth()->user();
+        if (!$follower->isFollowing($user->id))
+        {
+            $follower->follow($user->id);
+        }
+
+        return back();
+    }
+
+    // フォロー解除
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        if ($follower->isFollowing($user->id))
+        {
+            $follower->unfollow($user->id);
+        }
+
+        return back();
+    }
 }

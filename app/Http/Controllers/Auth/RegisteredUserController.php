@@ -13,13 +13,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-use App\Http\Controllers\Auth\RegisteredUserController;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
+
     public function create(): View
     {
         return view('auth.register');
@@ -55,19 +52,26 @@ class RegisteredUserController extends Controller
             'password_confirmation.same' => 'パスワード確認が一致しません。',
         ]);
 
-        User::create([
+        // ユーザー作成
+        $user=User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('added')->with('username', $user->username);
+        session(['username' => $user->username]);
+        return redirect()->route('added');
     }
 
 
-    public function added(): View {
+    public function added(): View
+    {
     $username = session('username');
     return view('auth.added', compact('username'));
-}
+    }
 
+    public function index(): View
+    {
+        return view('posts.index');
+    }
 }

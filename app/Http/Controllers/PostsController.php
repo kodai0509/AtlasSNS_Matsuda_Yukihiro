@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+
     public function index()
     {
-        // 自分の投稿の表示
-        $posts = Post::with('user')->orderBy('created_at', 'desc')->get();
-        $username = auth()->user()->username;
-        return view('posts.index', compact('posts', 'username'));
-        // フォローしているユーザーを表示
-        $user = auth()->user();
-        $followingIds = $user->follows->pluck('id')->toArray();
-        $posts = Post::with('user')
-        ->whereIn('user_id', array_merge([$user->id], $followingIds))
-         ->orderBy('created_at', 'desc')
-         ->get();
-         return view('posts.index', compact('posts', 'username'));
+         $user = auth()->user();
+
+        //  フォローしているユーザーのID表示
+         $followingIds = $user->following ? $user->following->pluck('followed_id')->toArray() : [];
+
+         $posts = Post::with('user')
+         ->whereIn('user_id', array_merge([$user->id], $followingIds))
+          ->orderBy('created_at', 'desc')
+          ->get();
+
+          return view('posts.index', compact('posts', 'user'));
     }
 
     public function store(Request $request)

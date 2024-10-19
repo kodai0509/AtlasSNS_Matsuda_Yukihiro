@@ -1,22 +1,123 @@
 @charset "utf-8";
-html{
-}
-body{
-}
+
+html {}
+
+body {}
+
 /* header */
-header{
-    background:#186AC9;
+header {
+    background: #186AC9;
 }
 
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
+}
+
+/* アコーディオンメニュー */
+/* ヘッダー */
+#head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #186AC9;
+    padding: 10px;
+    color: white;
+}
+
+/* 矢印の設定 */
+.arrow {
+    font-size: 18px;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* メニューリストの設定 */
+.menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    top: 100px;
+    right: 0px;
+    width: 150px;
+    display: none;
+}
+
+/* ロゴのスタイル */
+.logo {
+    height: 40px;
+    vertical-align: middle;
+}
+
+.menu-list li {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background-color: #f0f0f0;
+}
+
+.menu-list li:last-child {
+    border-bottom: none;
+}
+
+.menu-list li:hover,
+.menu-list li:active {
+    background-color: #0056b3;
+    /* 選択時に青に */
+    color: white;
+}
+
+.menu-list a {
+    text-decoration: none;
+    color: #666;
+    display: block;
+}
+
+/* クリック時の動き */
+
+[x-show="open"] {
+    display: block;
+}
+
+[x-clock] {
+    display: none;
+}
+
+/* ユーザー名・アイコンの設定 */
+.user-container {
+    display: flex;
+    align-items: center;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.user-menu img {
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.user-name {
+    margin: 0;
+    font-size: 18px;
 }

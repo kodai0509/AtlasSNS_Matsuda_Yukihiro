@@ -162,34 +162,20 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-        'username' => [
-        'required' => '必須項目です。',
-        'min' => 'ユーザー名は2文字以上で入力してください。',
-        'max' => 'ユーザー名は12文字以内で入力してください。',
-        ],
-        'email' =>[
-        'required' => '必須項目です。',
-        'min' => 'ユーザー名は5文字以上で入力してください。',
-        'max' => 'ユーザー名は40文字以内で入力してください。',
-        ],
-        'password' =>[
-        'required' => '必須項目です。',
-        'min' => 'ユーザー名は5文字以上で入力してください。',
-       'min' => 'ユーザー名は5文字以上で入力してください。',
-        'regex' => '英数字のみ可能です。',
-        ],
-         'password_confirmation'=>[
-            'required' => '必須項目です。',
-            'min' => 'ユーザー名は5文字以上で入力してください。',
-            'min' => 'ユーザー名は5文字以上で入力してください。',
-            'same' => 'パスワードと同じにしてください。',
-            'regex:' => '英数字のみ可能です。',
-         ],
+    'required' => ':attribute は必須です。',
+    'min' => ':attribute は最低 :min 文字必要です。',
+    'max' => ':attribute は最大 :max 文字までです。',
+    'unique' => ':attribute はすでに使用されています。',
+    'email' => ':attribute には有効なメールアドレスを入力してください。',
+    'regex' => ':attribute には英数字のみ使用可能です。',
+    'same' => ':attribute が一致しません。',
 
+    'attributes' => [
+        'username' => 'ユーザー名',
+         'email' => 'メールアドレス',
+         'password' => 'パスワード',
+         'password_confirmation' => 'パスワード確認',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
