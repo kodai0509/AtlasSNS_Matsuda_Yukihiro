@@ -9,7 +9,6 @@ class UsersController extends Controller
 {
     public function search(Request $request)
     {
-
         $authUserId = auth()->id();
 
         // １つ目の処理

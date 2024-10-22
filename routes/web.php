@@ -11,8 +11,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 require __DIR__ . '/auth.php';
 
 // ミドルウェア設定 (ログインしているユーザーのみアクセス可能なルート) //
-Route::middleware('auth')->group(function () {
-
+Route::middleware('auth')->group(function ()
+{
     // トップページのルート
     Route::get('/index', [PostsController::class, 'index'])->name('posts.index');
 
@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/follower-list', [FollowsController::class, 'followerList'])->name('follower.list');
 
     // 相手ユーザーのプロフィールページ (ユーザーの詳細プロフィール)
-    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show'); // 重複削除
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
     // フォロー機能 (フォロー・アンフォローの操作)
     Route::post('/users/{user}/follow', [UsersController::class, 'follow'])->name('follow');

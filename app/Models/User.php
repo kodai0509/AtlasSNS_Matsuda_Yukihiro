@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,36 +30,40 @@ class User extends Authenticatable
     // フォローしているユーザー情報
     public function following()
     {
-        return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id'); // 修正
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id');
     }
 
     // フォロワー情報
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'following_id'); // 修正
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
     }
 
     // フォローする
     public function follow(int $user_id)
     {
-        return $this->following()->attach($user_id);
+        if (!$this->isFollowing($user_id)) {
+            $this->following()->attach($user_id);
+        }
     }
 
     // フォロー解除
     public function unfollow(int $user_id)
     {
-        return $this->following()->detach($user_id);
+        if ($this->isFollowing($user_id)) {
+            $this->following()->detach($user_id);
+        }
     }
 
     // フォローしているか確認
     public function isFollowing(int $user_id)
     {
-        return $this->following()->where('following_id', $user_id)->exists();
+        return $this->following()->where('followed_id', $user_id)->exists();
     }
 
     // フォローされているか確認
     public function isFollowed(int $user_id)
     {
-        return $this->followers()->where('followed_id', $user_id)->exists(); // 修正
+        return $this->followers()->where('follower_id', $user_id)->exists();
     }
 }

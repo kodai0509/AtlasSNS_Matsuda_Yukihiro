@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Follow; // Followモデルをインポート
 
 class ProfileController extends Controller
 {
@@ -16,11 +17,9 @@ class ProfileController extends Controller
             return redirect()->route('login');
         }
 
-        $followModel = new Follow();
-
-        // フォロー数とフォロワー数をリレーションを使って取得
-        $followCount = $user->following()->count(); // フォローしているユーザーの数
-        $followerCount = $user->followers()->count(); // フォロワーの数
+        // フォロー数とフォロワー数を取得
+        $followCount = $user->following()->count();
+        $followerCount = $user->followers()->count();
 
         // ビューにカウントを渡す
         return view('profiles.profile', [

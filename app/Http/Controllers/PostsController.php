@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class PostsController extends Controller
 {
 
+    // 一覧表示
     public function index()
     {
          $user = auth()->user();
 
-        //  フォローしているユーザーのID表示
-         $followingIds = $user->following ? $user->following->pluck('followed_id')->toArray() : [];
+        //  $followingIds = $user->following ? $user->following->pluck('followed_id')->toArray() : [];
 
          $posts = Post::with('user')
          ->whereIn('user_id', array_merge([$user->id], $followingIds))
@@ -23,6 +23,13 @@ class PostsController extends Controller
           return view('posts.index', compact('posts', 'user'));
     }
 
+    // 新規ポスト入力
+     public function create()
+     {
+        // 後で
+     }
+
+    // 新規ポスト処理
     public function store(Request $request)
     {
         // バリデーション
