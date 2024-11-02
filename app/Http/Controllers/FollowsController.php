@@ -10,27 +10,31 @@ class FollowsController extends Controller
 {
     public function followList()
     {
-        return view('follows.followList');
+        $user = Auth::user();
+        $followCount = $user->following()->count();
+         $followerCount = $user->followers()->count();
+
+        return view('follows.followList',compact('followCount', 'followerCount'));
     }
 
     public function followerList()
     {
-        return view('follows.followerList');
+        $user = Auth::user();
+        $followCount = $user->following()->count();
+        $followerCount = $user->followers()->count();
+
+        return view('follows.followerList',compact('followCount', 'followerCount'));
     }
 
-    public function postCounts()
-    {
-        $posts = Post::get();
-        return view('yyyy', compact('posts'));
-    }
 
     public function show()
     {
         $user = Auth::user();
+        // フォロー数のカウント
+        $followCount = $user->following()->count();
+        // フォロワー数のカウント
+        $followerCount = $user->followers()->count();
 
-        $followCount = Follow::countFollowing($user->id);
-        $followerCount = Follow::countFollowers($user->id);
-
-        return view('profiles.profile', compact('user', 'followCount', 'followerCount'));
+        return view('login', compact('user', 'followCount', 'followerCount'));
     }
 }

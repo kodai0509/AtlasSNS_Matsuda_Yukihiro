@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
+            // $table->user_id('user_id'); ↓の変更前、できればこっち使いたい
             $table->unsignedBigInteger('user_id'); // user_idをunsignedBigIntegerに変更
             $table->string('post', 400);
             $table->timestamp('created_at')->useCurrent();

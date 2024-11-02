@@ -1,4 +1,5 @@
 <x-login-layout>
+    @section('content')
     <!-- 検索フォーム -->
     <form action="{{ route('search') }}" method="POST" class="mb-4">
         @csrf

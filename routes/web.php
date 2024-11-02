@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function ()
     // フォロー機能 (フォロー・アンフォローの操作)
     Route::post('/users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
     Route::delete('/users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
+
+    // ログアウト (ログアウトの処理)
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 // 登録 (新規ユーザー登録ページ)
@@ -50,6 +53,3 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 // ログイン (ログインページ)
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-
-// ログアウト (ログアウトの処理)
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

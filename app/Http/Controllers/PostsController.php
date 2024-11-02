@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -11,16 +12,24 @@ class PostsController extends Controller
     // 一覧表示
     public function index()
     {
-         $user = auth()->user();
+        // ログインユーザー情報取得
+        $user = Auth::user();
 
-        //  $followingIds = $user->following ? $user->following->pluck('followed_id')->toArray() : [];
+        // フォローしているユーザーのIDを取得
+        $following_id = Auth::user()->following()->pluck('followed_id');
 
+        //自分の及びフォローしている人の投稿を表示
          $posts = Post::with('user')
-         ->whereIn('user_id', array_merge([$user->id], $followingIds))
-          ->orderBy('created_at', 'desc')
-          ->get();
+         ->whereIn('user_id', $following_id)
+         ->orWhere('user_id', $user->id)
+         ->orderBy('created_at', 'desc')
+         ->get();
 
-          return view('posts.index', compact('posts', 'user'));
+        // フォロー数・フォロワー数を取得
+          $followCount = $user->following()->count();
+          $followerCount = $user->followers()->count();
+
+        return view('posts.index',compact('user','posts','followCount','followerCount'));
     }
 
     // 新規ポスト入力

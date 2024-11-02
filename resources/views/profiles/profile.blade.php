@@ -1,18 +1,4 @@
 <x-login-layout>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>プロフィール</title>
-    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
-    <header>
-        @include('layouts.navigation')
-    </header>
-
     <div id="container">
         <h1>{{ $user->username }}さんのプロフィール</h1>
         <div id="side-bar">
@@ -32,8 +18,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
-
-
 </x-login-layout>

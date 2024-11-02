@@ -27,7 +27,12 @@
             <ul x-show="open" x-cloak class="menu-list">
                 <li><a href="{{ route('posts.index') }}">ホーム</a></li>
                 <li><a href="{{ route('profiles.profile') }}">プロフィール編集</a></li>
-                <li><a href="{{ route('logout') }}">ログアウト</a></li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                     @csrf
+                     <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">ログアウト</button>
+                     </form>
+                </li>
             </ul>
         </div>
     </div>

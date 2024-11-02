@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Follow; // Followモデルをインポート
+use App\Models\Follow;
 
 class ProfileController extends Controller
 {
@@ -21,11 +21,7 @@ class ProfileController extends Controller
         $followCount = $user->following()->count();
         $followerCount = $user->followers()->count();
 
-        // ビューにカウントを渡す
-        return view('profiles.profile', [
-            'followCount' => $followCount,
-            'followerCount' => $followerCount,
-            'user' => $user,
-        ]);
+
+        return view('profiles.profile', compact('user','followCount', 'followerCount'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 
 class UsersController extends Controller
 {
@@ -29,23 +30,25 @@ class UsersController extends Controller
     public function follow(User $user)
     {
         $follower = auth()->user();
-        if (!$follower->isFollowing($user->id))
+        //フォローしているか
+        $is_following = $follower->isFollowing($user->id);
+        if (!$is_following)
         {
             $follower->follow($user->id);
+            return back();
         }
-
-        return back();
     }
 
     // フォロー解除
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        if ($follower->isFollowing($user->id))
+
+        $is_following = $follower->isFollowing($user->id);
+        if ($is_following)
         {
             $follower->unfollow($user->id);
+            return back();
         }
-
-        return back();
     }
 }
