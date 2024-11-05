@@ -18,7 +18,7 @@ class PostsController extends Controller
         // フォローしているユーザーのIDを取得
         $following_id = Auth::user()->following()->pluck('followed_id');
 
-        //自分の及びフォローしている人の投稿を表示
+        //自分の及びフォローしているの投稿を表示
          $posts = Post::with('user')
          ->whereIn('user_id', $following_id)
          ->orWhere('user_id', $user->id)
