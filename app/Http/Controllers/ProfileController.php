@@ -24,4 +24,13 @@ class ProfileController extends Controller
 
         return view('profiles.profile', compact('user','followCount', 'followerCount'));
     }
+
+    // 相手ユーザーのプロフィールページへ遷移する
+    // public function show($id)
+    // {
+    //      // プロフィールを表示するユーザーを取得
+    //       $user = User::findOrFail($id);
+
+    //       return view('profiles.profile', compact('user'));
+    // }
 }

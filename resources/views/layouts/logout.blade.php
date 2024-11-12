@@ -27,9 +27,9 @@
             <!-- <h1><img src="images/atlas.png"></h1>
             <p>Social Network Service</p> -->
         </header>
-        <div id="container">
+        <!-- <div id="container">
             {{ $slot }}
-        </div>
+        </div> -->
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="JavaScriptファイルのURL"></script>
         <script src="JavaScriptファイルのURL"></script>

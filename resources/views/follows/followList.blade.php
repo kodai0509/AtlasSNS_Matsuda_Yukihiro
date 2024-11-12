@@ -1,7 +1,7 @@
 <x-login-layout>
 
 <div class="container">
-<!-- ヘッダー（フォロワーリストのアイコン表示 -->
+<!-- ヘッダー（フォローリストのアイコン表示 -->
  <div class="header">
   <img src="{{ asset('/images/' . $user->icon_image) }}">
  </div>

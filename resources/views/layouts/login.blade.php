@@ -22,22 +22,20 @@
 
   <div id="row">
     <div id="container">
-      {{ $slot }}
+    {{ $slot }}
     </div>
     <div id="side-bar">
       <div id="confirm">
         <p>{{ Auth::user()->username }}さんの</p>
         <div>
-          <p>フォロー数</p>
-          <p>{{ $followCount }}名</p>
+          <p>フォロー数 {{ $followCount }}名</p>
         </div>
-        <p class="btn"><a href="{{ route('follow.list') }}">フォローリスト</a></p>
+        <button type="button" class="btn btn-primary"><a href="{{ route('follow.list') }}" style="color: white;">フォローリスト</a></button>
         <div>
-          <p>フォロワー数</p>
-          <p>{{ $followerCount }}名</p>
+          <p>フォロワー数 {{ $followerCount }}名</p>
         </div>
-        <p class="btn"><a href="{{ route('follower.list') }}">フォロワーリスト</a></p>
-        <p class="btn"><a href="{{ route('search') }}">ユーザー検索</a></p>
+        <button type="button" class="btn btn-primary"><a href="{{ route('follower.list') }}" style="color: white;">フォロワーリスト</a></button>
+        <button type="button" class="btn btn-primary"><a href="{{ route('search') }}" style="color: white;">ユーザー検索</a></button>
       </div>
     </div>
   </div>

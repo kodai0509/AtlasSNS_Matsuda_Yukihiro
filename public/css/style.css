@@ -17,6 +17,7 @@ header {
 
 #container {
     flex: 0 0 80%;
+    width: auto;
 }
 
 #side-bar {
@@ -121,4 +122,31 @@ header {
 .user-name {
     margin: 0;
     font-size: 18px;
+}
+
+
+/* 投稿一覧のレイアウト */
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+li {
+    list-style: none;
+    border-bottom: 1px solid #000;
+    display: flex;
+}
+
+.post-content {
+    width: 100%;
+    padding: 15px;
+}
+
+.post-content>div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-name {
+    margin-bottom: 10px;
 }
