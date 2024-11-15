@@ -1,18 +1,33 @@
 <x-login-layout>
 
-<!-- ヘッダー（フォロワーリストのアイコン表示 -->
-<div class='header'>
-<img src="{{ asset('/images/' . $user->icon_image) }}">
+<!-- フォロワーリストのアイコン表示 -->
+<div class="follower-icon">
+   @foreach($followerUsers as $follower)
+   <a href="{{ route('profiles.profile',['user' => $follower->id]) }}">
+      <img src="{{ asset('/images/' . $follower->icon_image) }}">
+   </a>
+   @endforeach
 </div>
 
 <!-- 自分をフォローしている人の投稿一覧 -->
-<div class='follower-posts'>
-   @foreach($posts as $post)
-    <img src="{{ asset('/images/' . $user->icon_image) }}">
-    <p>{{ $post->user->username }}</p>
-    <p>{{ $post->post }}</p>
-    <p>{{ $post->created_at }}</p>
-
+<div class="follower-index">
+    @foreach($posts as $post)
+    <ul>
+      <li class="post-block" style="position: relative;">
+         <figure>
+            <a href="{{ route('profiles.profile', ['user' => $post->user->id]) }}">
+             <img src="{{ asset('/images/' . $post->user->icon_image) }}">
+             </a>
+         </figure>
+         <div class="follower-content">
+            <div class="follower-name">{{ $post->user->username }}</div>
+            <div class="follower-post">{{ $post->post }}</div>
+         </div>
+         <div class="date" style="position: absolute; right: 10px;">
+            {{ $post->created_at }}
+         </div>
+      </li>
+    </ul>
    @endforeach
 </div>
 
