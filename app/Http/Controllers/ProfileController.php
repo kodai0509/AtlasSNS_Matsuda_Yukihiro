@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Post;
 
 class ProfileController extends Controller
 {
+    //その他のユーザーのプロフィール
     public function profile()
     {
         // 認証済みユーザーを取得
@@ -21,16 +23,10 @@ class ProfileController extends Controller
         $followCount = $user->following()->count();
         $followerCount = $user->followers()->count();
 
+        // ポストを表示
+        $posts = Post::with('user')->where('user_id', $user->id)->get();
 
-        return view('profiles.profile', compact('user','followCount', 'followerCount'));
+        return view('profiles.profile', compact('user','followCount', 'followerCount','posts'));
     }
 
-    // 相手ユーザーのプロフィールページへ遷移する
-    // public function show($id)
-    // {
-    //      // プロフィールを表示するユーザーを取得
-    //       $user = User::findOrFail($id);
-
-    //       return view('profiles.profile', compact('user'));
-    // }
 }

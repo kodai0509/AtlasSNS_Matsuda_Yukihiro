@@ -16,6 +16,9 @@ Route::middleware('auth')->group(function ()
     // トップページのルート
     Route::get('/index', [PostsController::class, 'index'])->name('posts.index');
 
+    // 認証ユーザーのプロフィールページ
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profiles.profile');
+
     // 投稿の保存 (新しい投稿を保存)
     Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 
@@ -26,7 +29,8 @@ Route::middleware('auth')->group(function ()
     Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
 
     // プロフィール画面 (ユーザーのプロフィール編集画面)
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('profiles.profile');
+    // Route::get('/profile', [ProfileController::class, 'profile'])->name('profiles.profile');
+    Route::get('/profile/{user}', [UsersController::class, 'show'])->name('profile.show');
 
     // 検索画面 (ユーザーの検索)
     Route::match(['get', 'post'], '/search', [UsersController::class, 'search'])->name('search');
@@ -36,11 +40,11 @@ Route::middleware('auth')->group(function ()
     Route::get('/follower-list', [FollowsController::class, 'followerList'])->name('follower.list');
 
     // 相手ユーザーのプロフィールページ (ユーザーの詳細プロフィール)
-    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{user}', [UsersController::class, 'show'])->name('profile.show');
 
     // フォロー機能 (フォロー・アンフォローの操作)
-    Route::post('/users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
-    Route::delete('/users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
+    Route::post('/users/{user}/follow', [FollowsController::class, 'follow'])->name('follow');
+    Route::delete('/users/{user}/unfollow', [FollowsController::class, 'unfollow'])->name('unfollow');
 
     // ログアウト (ログアウトの処理)
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

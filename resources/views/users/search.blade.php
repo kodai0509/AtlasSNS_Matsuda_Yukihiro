@@ -4,13 +4,10 @@
     <form action="{{ route('search') }}" method="POST" class="mb-4">
         @csrf
         <input
-            type="text"
-            name="keyword"
-            class="form-control"
-            placeholder="ユーザー名を入力"
+            type="text" name="keyword" class="form" placeholder="ユーザー名を入力"
             value="{{ request('keyword') }}">
         <button type="submit" class="btn btn-success">
-            <img src="{{ asset('images/search.png') }}" alt="Search Icon">
+            <img src="{{ asset('images/search.png') }}" alt="Search Icon" style="width: 20px; height: 20px;">
         </button>
     </form>
 
@@ -23,41 +20,38 @@
     @if($users->isEmpty())
         <p>No users found.</p>
     @else
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    @foreach ($users as $user)
-                        <div class="card mb-3">
-                            <div class="card-header p-3 w-100 d-flex">
-                                <img
-                                    src="{{ asset('images/' . $user->icon_image) }}"
-                                    alt="UserIcon"
-                                    class="user-icon">
-                                <div class="ml-2 d-flex flex-column">
-                                    <p class="mb-0">{{ $user->username }}</p>
-                                </div>
-                                <div class="d-flex justify-content-end flex-grow-1">
-                                    @if (auth()->user()->isFollowing($user->id))
-                                        <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">
-                                                フォロー解除
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary">
-                                                フォローする
-                                            </button>
-                                        </form>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+
+    @foreach ($users as $user)
+    <ul style="list-style: none; padding: 0;">
+        <li style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="{{ route('profile.show', ['user' => $user->id]) }}">
+                    <img src="{{ asset('images/' . $user->icon_image) }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                </a>
+                <p class="mb-0">{{ $user->username }}</p>
             </div>
+            <div>
+                @if (auth()->user()->isFollowing($user->id))
+                <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        フォロー解除
+                    </button>
+                </form>
+                @else
+                <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        フォローする
+                    </button>
+                </form>
+                @endif
+            </div>
+        </li>
+    </ul>
+    @endforeach
+
     @endif
 
     <!-- リロード用ボタン -->

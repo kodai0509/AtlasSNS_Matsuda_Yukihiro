@@ -51,4 +51,12 @@ class UsersController extends Controller
             return back();
         }
     }
+
+    // その他ユーザーのプロフィール、投稿
+    public function show(User $user)
+    {
+    $posts = Post::with('user')->where('user_id', $user->id)->get();
+    return view('profiles.profile', compact('user', 'posts'));
+    }
+
 }

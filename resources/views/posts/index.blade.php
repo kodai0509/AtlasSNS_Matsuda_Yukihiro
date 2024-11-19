@@ -9,11 +9,8 @@
 
                 <!-- 投稿フォーム -->
                 {!! Form::input('text', 'newPost', null, ['class' => 'form-control',
-                    'required',
-                    'class' => 'form-control',
-                    'placeholder' => '投稿内容を入力してください。',
-                    'style' => 'flex-grow: 1; margin-right: 10px;'
-                ]) !!}
+                    'required','placeholder' => '投稿内容を入力してください。',
+                    'style' => 'flex-grow: 1; margin-right: 10px;']) !!}
 
                 <!-- ポストアイコン -->
                 <button type="submit" class="btn pull-right"
@@ -30,14 +27,14 @@
                 <ul>
                     <li class="post-block" style="position: relative;">
                         <figure>
-                            <img src="{{ asset('/images/' . $post->user->icon_image) }}">
+                            <img src="{{ asset('/images/' . $post->user->icon_image) }}"
+                            class="user-icon">
                         </figure>
                         <div class='post-content'>
                             <div class="post-name">{{ $post->user->username }}</div>
                             <div class="post">{{ $post->post }}</div>
                         </div>
                         <div class="date">{{ $post->created_at }}</div>
-
                         <!-- ログインユーザーの投稿にのみ編集・削除ボタンを表示 -->
                         @if($post->user_id === auth()->id())
                             <!-- 編集アイコン -->
