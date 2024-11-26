@@ -92,11 +92,6 @@ class PostsController extends Controller
     // 投稿を取得
     $post = Post::find($id);
 
-    // // 投稿が見つからない場合の処理
-    // if (!$post) {
-    //     return redirect()->route('posts.index')->with('error', '投稿が見つかりません')->setStatusCode(404);
-    // }
-
     // 自分の投稿のみ削除できるようにする
     if ($post->user_id !== auth()->id()) {
         return redirect()->route('posts.index')->with('error', '権限がありません')->setStatusCode(403);

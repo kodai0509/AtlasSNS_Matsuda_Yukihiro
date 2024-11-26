@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function ()
     Route::post('/users/{user}/follow', [FollowsController::class, 'follow'])->name('follow');
     Route::delete('/users/{user}/unfollow', [FollowsController::class, 'unfollow'])->name('unfollow');
 
+    // 自身のプロフィール編集
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profiles.update');
+
     // ログアウト (ログアウトの処理)
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
