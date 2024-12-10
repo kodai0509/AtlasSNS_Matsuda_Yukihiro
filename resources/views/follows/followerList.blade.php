@@ -1,9 +1,9 @@
 <x-login-layout>
 
 <!-- フォロワーリストのアイコン表示 -->
-<div class="follower-icon">
+<div class="follower-icons">
    @foreach($followerUsers as $follower)
-   <a href="{{ route('profiles.profile',['user' => $follower->id]) }}">
+   <a href="{{ route('profile.show',['user' => $follower->id]) }}">
       <img src="{{ asset('/images/' . $follower->icon_image) }}">
    </a>
    @endforeach
@@ -15,13 +15,13 @@
     <ul>
       <li class="post-block" style="position: relative;">
          <figure>
-            <a href="{{ route('profiles.profile', ['user' => $post->user->id]) }}">
+            <a href="{{ route('profile.show', ['user' => $post->user->id]) }}">
              <img src="{{ asset('/images/' . $post->user->icon_image) }}">
              </a>
          </figure>
          <div class="follower-content">
             <div class="follower-name">{{ $post->user->username }}</div>
-            <div class="follower-post">{{ $post->post }}</div>
+            <div class="follower-post">{{ $post->content }}</div>
          </div>
          <div class="date" style="position: absolute; right: 10px;">
             {{ $post->created_at }}

@@ -1,12 +1,14 @@
 @charset "utf-8";
 
-html {}
+html {
+}
 
-body {}
+body {
+}
 
 /* header */
 header {
-    background: #186AC9;
+    background: #186ac9;
 }
 
 /* main content */
@@ -47,7 +49,7 @@ header {
 .divider {
     border: none;
     height: 1px;
-    background-color: #B3B3B3;
+    background-color: #b3b3b3;
     margin: 20px 0;
 }
 
@@ -64,7 +66,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #186AC9;
+    background-color: #186ac9;
     padding: 10px 10px 0;
     color: white;
 }
@@ -157,13 +159,12 @@ header {
     font-size: 18px;
 }
 
-
 /* 投稿一覧のレイアウト */
 .form-group {
     position: relative;
     display: flex;
     align-items: center;
-    border-bottom: 10px solid #B3B3B3;
+    border-bottom: 10px solid #b3b3b3;
 }
 
 .form-group textarea {
@@ -189,13 +190,15 @@ header {
     height: 50px;
 }
 
-
 li {
     list-style: none;
     border-bottom: 1px solid #000;
     display: flex;
 }
 
+.user-icon {
+    padding-left: 50px;
+}
 .post-content {
     width: 100%;
     padding: 15px;
@@ -220,7 +223,7 @@ li {
     right: 25px;
     bottom: 10px;
     cursor: pointer;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .delete:hover {
@@ -283,7 +286,7 @@ li {
     display: block;
     width: 100%;
     margin-top: 15px;
-    background-color: #186AC9;
+    background-color: #186ac9;
     color: white;
     border: none;
     padding: 10px;
@@ -293,8 +296,7 @@ li {
     transition: background-color 0.3s ease;
 }
 
-
-/* 更新ボタン（アイコン）のスタイル */
+/* 更新ボタン */
 .icon-container {
     position: absolute;
     bottom: -50px;
@@ -320,5 +322,62 @@ li {
     display: block;
     margin: 0 auto;
     outline: none;
+}
 
+/* フォローリスト */
+.follow-icons {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 10px solid #b3b3b3;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* 各アイコンが10個以上になったら折り返し */
+.follow-icons > a {
+    display: inline-block;
+    text-align: center;
+}
+
+.post-block {
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-bottom: 10px;
+}
+
+.follow-name {
+    margin-left: 20px;
+}
+
+/* フォロワーリスト */
+.follower-icons {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 10px solid #b3b3b3;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* 各アイコンが10個以上になったら折り返し */
+.follower-icons > a {
+    display: inline-block;
+    text-align: center;
+}
+
+.post-block {
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-bottom: 10px;
+}
+
+.follower-name {
+    margin-left: 20px;
 }
