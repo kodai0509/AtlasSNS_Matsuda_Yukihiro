@@ -22,30 +22,44 @@
 
   <div id="row">
     <div id="container">
-    {{ $slot }}
+      {{ $slot }}
     </div>
+
     <div id="side-bar">
       <div id="confirm">
         <p>{{ Auth::user()->username }}さんの</p>
-        <div>
+        <div class="follow-count">
           <p>フォロー数 {{ $followCount }}名</p>
         </div>
-        <button type="button" class="btn btn-primary"><a href="{{ route('follow.list') }}" style="color: white;">フォローリスト</a></button>
-        <div>
+        <div class="follow-btn">
+          <button type="button" class="btn btn-primary">
+            <a href="{{ route('follow.list') }}">フォローリスト</a>
+          </button>
+        </div>
+        <div class="follower-count">
           <p>フォロワー数 {{ $followerCount }}名</p>
         </div>
-        <button type="button" class="btn btn-primary"><a href="{{ route('follower.list') }}" style="color: white;">フォロワーリスト</a></button>
-        <button type="button" class="btn btn-primary"><a href="{{ route('search') }}" style="color: white;">ユーザー検索</a></button>
+        <div class="follower-btn">
+          <button type="button" class="btn btn-primary">
+            <a href="{{ route('follower.list') }}">フォロワーリスト</a>
+          </button>
+        </div>
+        <hr class="divider">
+        <!-- ユーザー検索ボタン -->
+        <div class="search-button-wrapper">
+          <button type="button" class="btn btn-primary">
+            <a href="{{ route('search') }}">ユーザー検索</a>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <footer>
-  </footer>
+    <footer>
+    </footer>
 
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="JavaScriptファイルのURL"></script>
-  <script src="JavaScriptファイルのURL"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="JavaScriptファイルのURL"></script>
+    <script src="JavaScriptファイルのURL"></script>
 </body>
 
 </html>
