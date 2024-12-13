@@ -15,6 +15,7 @@ header {
 #row {
     display: flex;
     flex-flow: row wrap;
+    height: 100vh;
 }
 
 #container {
@@ -27,7 +28,8 @@ header {
 #side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
 }
 
 #side-bar a {
@@ -40,8 +42,8 @@ header {
     word-spacing: 20px;
 }
 
-.follow-btn,
-.follower-btn {
+.follow-list,
+.follower-list {
     text-align: right;
     margin-bottom: 10px;
 }
@@ -380,4 +382,68 @@ li {
 
 .follower-name {
     margin-left: 20px;
+}
+
+/* ユーザー検索 */
+.search-form {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    border-bottom: 10px solid #b3b3b3;
+    gap: 200px;
+}
+
+.search-form form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form input.form {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-form .search-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+/* 検索ワードのスタイル */
+.search-form p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.user-item {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    border-bottom: none;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.follow-btn {
+    padding-right: 200px; /* フォローボタンをユーザー名に近づける */
 }
