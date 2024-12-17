@@ -31,7 +31,7 @@
         <div class="follow-count">
           <p>フォロー数 {{ $followCount }}名</p>
         </div>
-        <div class="follow-btn">
+        <div class="follow-list">
           <button type="button" class="btn btn-primary">
             <a href="{{ route('follow.list') }}">フォローリスト</a>
           </button>
@@ -39,7 +39,7 @@
         <div class="follower-count">
           <p>フォロワー数 {{ $followerCount }}名</p>
         </div>
-        <div class="follower-btn">
+        <div class="follower-list">
           <button type="button" class="btn btn-primary">
             <a href="{{ route('follower.list') }}">フォロワーリスト</a>
           </button>

@@ -176,6 +176,18 @@ header {
     padding-right: 50px;
 }
 
+.post-content {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .post-icon {
     position: absolute;
     right: 10px;
@@ -184,7 +196,6 @@ header {
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    cursor: pointer;
 }
 
 .post-icon img {
@@ -192,14 +203,17 @@ header {
     height: 50px;
 }
 
-li {
+.li {
     list-style: none;
     border-bottom: 1px solid #000;
     display: flex;
+    align-items: flex-start;
+    position: relative;
 }
 
 .user-icon {
     padding-left: 50px;
+    padding-right: 20px;
 }
 .post-content {
     width: 100%;
@@ -345,14 +359,41 @@ li {
     text-align: center;
 }
 
-.post-block {
+.follow-content {
+    width: 100%;
     padding-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.follow-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.follow-icon {
     padding-left: 50px;
-    padding-bottom: 10px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.follow-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .follow-name {
-    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
 }
 
 /* フォロワーリスト */
@@ -374,14 +415,41 @@ li {
     text-align: center;
 }
 
-.post-block {
+.follower-content {
+    width: 100%;
     padding-top: 10px;
-    padding-left: 50px;
-    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.follower-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.follower-icon {
+    padding-left: 100px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.follower-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .follower-name {
-    margin-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
 }
 
 /* ユーザー検索 */
@@ -445,5 +513,173 @@ li {
 }
 
 .follow-btn {
-    padding-right: 200px; /* フォローボタンをユーザー名に近づける */
+    padding-right: 200px;
+}
+
+/* プロフィール編集 */
+.profile-edit {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 200px;
+    gap: 20px;
+}
+
+.my-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+/* 各フォームのスタイル */
+.profile-edit .name-edit,
+.profile-edit .mail-edit,
+.profile-edit .bio-edit,
+.profile-edit .password-edit,
+.profile-edit .password-confirmation,
+.profile-edit .icon-edit {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+/* ラベルのスタイル */
+.profile-edit label {
+    font-weight: bold;
+    font-size: 14px;
+    width: 1000px;
+    white-space: nowrap;
+}
+
+/* 入力フィールドのスタイル */
+.profile-edit input[type="text"],
+.profile-edit input[type="email"],
+.profile-edit input[type="password"],
+.profile-edit input[type="file"],
+.profile-edit .icon-edit input[type="file"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #eeeeee;
+    width: 1000px;
+    gap: 20px;
+}
+
+/* 保存ボタン */
+.profile-edit .edit-button button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+/* プロフィール（その他ユーザ－） */
+.profile-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 10px solid #b3b3b3;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+
+.profile-icon {
+    margin-right: 20px;
+}
+
+.profile-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.username,
+.user_profile {
+    font-size: 16px;
+    color: #333;
+}
+
+.username .user-name {
+    padding-left: 100px;
+}
+
+.follow-btn {
+    margin-left: auto;
+}
+
+.btn {
+    padding: 5px 15px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.post-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.users-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.users-name {
+    font-size: 16px;
+    color: #333;
+}
+
+.users-post {
+    font-size: 14px;
+    color: #666;
+}
+
+.date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #999;
+    align-self: flex-end;
 }
