@@ -3,7 +3,7 @@
     {!! Form::open(['route' => 'posts.store']) !!}
     <div class="form-group">
         <!-- アイコン表示 -->
-        <img src="{{ asset('images/' . $user->icon_image) }}" class="user-icon">
+        <img class="rounded-circle" src="{{ Storage::url($user->icon_image) }}" class="user-icon">
 
         <!-- 投稿フォーム -->
         {!! Form::textarea('newPost', null, ['class' => 'form-control', 'name' => 'newPost', 'required', 'placeholder' => '投稿内容を入力してください。']) !!}

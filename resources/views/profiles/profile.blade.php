@@ -42,7 +42,13 @@
 
             <!-- アイコン -->
             <div class="icon-edit">
-                <label for="icon_image">アイコン画像</label>
+                <label for="icon_image">
+                    @if ($user->icon_image === null)
+                    <img class="rounded-circle" src="{{ asset('icon1.png') }}">
+                    @else
+                    <img class="rounded-circle" src="{{ Storage::url($user->icon_image) }}">
+                    @endif
+                </label>
                 <input type="file" id="icon_image" name="icon_image">
             </div>
 

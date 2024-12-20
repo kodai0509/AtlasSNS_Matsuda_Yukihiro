@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Follow;
@@ -24,48 +25,46 @@ class ProfileController extends Controller
         $followerCount = $user->followers()->count();
 
         // ポストを表示
-       if (Auth::id() === $user->id) {
-        // 自分の投稿は表示しない
-         $posts = collect();
-          } else {
+        if (Auth::id() === $user->id) {
+            // 自分の投稿は表示しない
+            $posts = collect();
+        } else {
             $posts = Post::with('user')->where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
-          }
+        }
 
-        return view('profiles.profile', compact('user','followCount', 'followerCount','posts'));
+        return view('profiles.profile', compact('user', 'followCount', 'followerCount', 'posts'));
     }
-
 
     // 自身のプロフィール編集
     public function update(Request $request)
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    // バリデーション
-    $validated = $request->validate([
-        'username' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $user->id,
-        'bio' => 'nullable|string|max:1000',
-        'password' => 'nullable|min:8|confirmed',
-        'icon_image' => 'nullable|image|max:2048',
-    ]);
+        // バリデーション
+        $validated = $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'bio' => 'nullable|string|max:1000',
+            'password' => 'nullable|min:8|confirmed',
+            'icon_image' => 'nullable|image|max:2048',
+        ]);
 
-    // プロフィール更新
-    $user->username = $validated['username'];
-    $user->email = $validated['email'];
-    $user->bio = $validated['bio'];
+        // プロフィール更新
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+        $user->bio = $validated['bio'];
 
-    if ($request->filled('password')) {
-        $user->password = bcrypt($validated['password']);
+        if ($request->filled('password')) {
+            $user->password = bcrypt($validated['password']);
+        }
+
+        if ($request->icon_image != null) {
+            $iconImagePath = $request->icon_image->store('public/images');
+            $iconImagePath = $request->file('icon_image')->store('images', 'public');
+            $user['icon_image'] = $iconImagePath;
+        }
+
+        $user->save();
+        return redirect()->route('posts.index');
     }
-
-    if ($request->hasFile('icon_image')) {
-        $filename = $request->file('icon_image')->store('images', 'public');
-        $user->icon_image = basename($filename);
-    }
-
-    $user->save();
-
-    return redirect()->route('profiles.profile');
-}
-
 }
