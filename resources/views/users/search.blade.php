@@ -2,8 +2,7 @@
     @section('content')
     <!-- 検索フォーム -->
     <div class="search-form">
-        <form action="{{ route('search') }}" method="POST" class="mb-4">
-            @csrf
+        <form action="{{ route('search') }}" method="GET" class="mb-4">
             <input type="text" name="keyword" class="form" placeholder="ユーザー名を入力"
                 value="{{ request('keyword') }}">
             <button type="submit" class="search-icon">
@@ -24,7 +23,12 @@
             <li class="user-item">
                 <div class="user-info">
                     <a href="{{ route('profile.show', ['user' => $user->id]) }}">
-                        <img src="{{ asset('images/' . $user->icon_image) }}" class="user-icon">
+                        <!-- アイコン画像の表示 -->
+                        <img class="icon" src="{{
+                            $user->icon_image && file_exists(storage_path('app/public/images/' . $user->icon_image))
+                            ? Storage::url('images/' . $user->icon_image)
+                            : asset('images/icon1.png')
+                        }}">
                     </a>
                     <p class="user-name">{{ $user->username }}</p>
                 </div>

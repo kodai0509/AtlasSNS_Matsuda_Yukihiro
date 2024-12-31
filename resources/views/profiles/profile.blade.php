@@ -5,7 +5,7 @@
     <div class="profile-edit">
         <!-- アイコン表示 -->
         <div class="my-icon">
-            <img src="{{ asset('/images/' . $user->icon_image) }}">
+            <img class="rounded-circle" src="{{ Storage::url('images/' . (auth()->user()->icon_image ?? 'icon1.png')) }}">
         </div>
         <form action="{{ route('profiles.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -42,13 +42,7 @@
 
             <!-- アイコン -->
             <div class="icon-edit">
-                <label for="icon_image">
-                    @if ($user->icon_image === null)
-                    <img class="rounded-circle" src="{{ asset('icon1.png') }}">
-                    @else
-                    <img class="rounded-circle" src="{{ Storage::url($user->icon_image) }}">
-                    @endif
-                </label>
+                <label for="icon_image">アイコン画像</label>
                 <input type="file" id="icon_image" name="icon_image">
             </div>
 
@@ -64,7 +58,8 @@
     <div class="profile-group">
         <!-- ユーザーアイコン -->
         <figure class="profile-icon">
-            <img src="{{ asset('/images/' . $user->icon_image) }}" alt="ユーザーアイコン">
+            <img class="rounded-circle" src="{{
+                $user->icon_image && file_exists(storage_path('app/public/images/' . $user->icon_image)) ? Storage::url('images/' . $user->icon_image) : asset('images/icon1.png') }}">
         </figure>
 
         <!-- ユーザー情報 -->
@@ -95,7 +90,6 @@
             @endif
         </div>
     </div>
-
     @endif
 
     <!-- 投稿一覧表示 -->
@@ -105,7 +99,9 @@
             <li class="post-block">
                 <div class="post-header">
                     <figure class="users-icon">
-                        <img src="{{ asset('/images/' . $post->user->icon_image) }}" alt="User Icon">
+                        <img class="rounded-circle" src="{{
+                            $post->user->icon_image && file_exists(storage_path('app/public/images/' . $post->user->icon_image))
+                            ? Storage::url('images/' . $post->user->icon_image) : asset('images/icon1.png') }}">
                     </figure>
                     <div class="post-details">
                         <div class="users-name">{{ $post->user->username }}</div>
@@ -117,5 +113,4 @@
         </ul>
         @endforeach
     </div>
-
 </x-login-layout>

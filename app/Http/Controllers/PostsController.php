@@ -19,24 +19,24 @@ class PostsController extends Controller
         $following_id = Auth::user()->following()->pluck('followed_id');
 
         //自分の及びフォローしているの投稿を表示
-         $posts = Post::with('user')
-         ->whereIn('user_id', $following_id)
-         ->orWhere('user_id', $user->id)
-         ->orderBy('created_at', 'desc')
-         ->get();
+        $posts = Post::with('user')
+            ->whereIn('user_id', $following_id)
+            ->orWhere('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // フォロー数・フォロワー数を取得
-          $followCount = $user->following()->count();
-          $followerCount = $user->followers()->count();
+        $followCount = $user->following()->count();
+        $followerCount = $user->followers()->count();
 
-        return view('posts.index',compact('user','posts','followCount','followerCount'));
+        return view('posts.index', compact('user', 'posts', 'followCount', 'followerCount'));
     }
 
     // 新規ポスト入力
-     public function create()
-     {
+    public function create()
+    {
         // 後で
-     }
+    }
 
     // 新規ポスト処理
     public function store(Request $request)
@@ -89,19 +89,18 @@ class PostsController extends Controller
     public function destroy($id)
     {
 
-    // 投稿を取得
-    $post = Post::find($id);
+        // 投稿を取得
+        $post = Post::find($id);
 
-    // 自分の投稿のみ削除できるようにする
-    if ($post->user_id !== auth()->id()) {
-        return redirect()->route('posts.index')->with('error', '権限がありません')->setStatusCode(403);
+        // 自分の投稿のみ削除できるようにする
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index')->with('error', '権限がありません')->setStatusCode(403);
+        }
+
+        // 投稿を削除
+        $post->delete();
+
+        // TOPページにリダイレクト
+        return redirect()->route('posts.index')->with('success', '投稿が削除されました！');
     }
-
-    // 投稿を削除
-    $post->delete();
-
-    // TOPページにリダイレクト
-    return redirect()->route('posts.index')->with('success', '投稿が削除されました！');
-}
-
 }

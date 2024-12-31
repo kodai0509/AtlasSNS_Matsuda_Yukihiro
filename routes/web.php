@@ -11,8 +11,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 require __DIR__ . '/auth.php';
 
 // ミドルウェア設定 (ログインしているユーザーのみアクセス可能なルート) //
-Route::middleware('auth')->group(function ()
-{
+Route::middleware('auth')->group(function () {
     // トップページのルート
     Route::get('/index', [PostsController::class, 'index'])->name('posts.index');
 
@@ -23,17 +22,16 @@ Route::middleware('auth')->group(function ()
     Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 
     // 編集 (投稿の更新)
-    Route::put('/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
+    Route::put('/posts/{id}', [PostsController::class, 'update'])->name('posts.update');
 
     // 削除 (投稿の削除)
     Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.destroy');
 
     // プロフィール画面 (ユーザーのプロフィール編集画面)
-    // Route::get('/profile', [ProfileController::class, 'profile'])->name('profiles.profile');
     Route::get('/profile/{user}', [UsersController::class, 'show'])->name('profile.show');
 
     // 検索画面 (ユーザーの検索)
-    Route::match(['get', 'post'], '/search', [UsersController::class, 'search'])->name('search');
+    Route::get('/search', [UsersController::class, 'search'])->name('search');
 
     // フォロー・フォロワーリストページ
     Route::get('/follow-list', [FollowsController::class, 'followList'])->name('follow.list');

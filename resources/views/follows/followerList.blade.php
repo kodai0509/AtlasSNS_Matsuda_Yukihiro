@@ -1,10 +1,10 @@
 <x-login-layout>
-
    <!-- フォロワーリストのアイコン表示 -->
    <div class="follower-icons">
       @foreach($followerUsers as $follower)
-      <a href="{{ route('profile.show',['user' => $follower->id]) }}">
-         <img src="{{ asset('/images/' . $follower->icon_image) }}">
+      <a href="{{ route('profile.show', ['user' => $follower->id]) }}">
+         <img class="icon"
+            src="{{ $follower->icon_image && file_exists(storage_path('app/public/images/' . $follower->icon_image)) ? Storage::url('images/' . $follower->icon_image): asset('images/icon1.png') }}">
       </a>
       @endforeach
    </div>
@@ -17,7 +17,11 @@
             <div class="follower-content">
                <figure class="follower-icon">
                   <a href="{{ route('profile.show', ['user' => $post->user->id]) }}">
-                     <img src="{{ asset('/images/' . $post->user->icon_image) }}">
+                     <img class="rounded-circle"
+                        src="{{ $post->user->icon_image && file_exists(storage_path('app/public/images/' . $post->user->icon_image))
+                                  ? Storage::url('images/' . $post->user->icon_image)
+                                  : asset('images/icon1.png') }}"
+                        alt="{{ $post->user->username }}のアイコン">
                   </a>
                </figure>
                <div class="follower-info">

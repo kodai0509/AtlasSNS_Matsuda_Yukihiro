@@ -58,13 +58,13 @@ class ProfileController extends Controller
             $user->password = bcrypt($validated['password']);
         }
 
-        if ($request->icon_image != null) {
-            $iconImagePath = $request->icon_image->store('public/images');
-            $iconImagePath = $request->file('icon_image')->store('images', 'public');
-            $user['icon_image'] = $iconImagePath;
+        if ($request->hasFile('icon_image')) {
+            $filename = $request->file('icon_image')->store('images', 'public');
+            $user->icon_image = basename($filename);
         }
 
         $user->save();
+
         return redirect()->route('posts.index');
     }
 }

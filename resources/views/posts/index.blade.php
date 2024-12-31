@@ -3,8 +3,7 @@
     {!! Form::open(['route' => 'posts.store']) !!}
     <div class="form-group">
         <!-- アイコン表示 -->
-        <img class="rounded-circle" src="{{ Storage::url($user->icon_image) }}" class="user-icon">
-
+        <img class="user-icon" src="{{ Storage::url('images/' . (auth()->user()->icon_image ?? 'icon1.png')) }}">
         <!-- 投稿フォーム -->
         {!! Form::textarea('newPost', null, ['class' => 'form-control', 'name' => 'newPost', 'required', 'placeholder' => '投稿内容を入力してください。']) !!}
 
@@ -22,13 +21,13 @@
             <li class="post-block" style="position: relative;">
                 <div class="post-content">
                     <figure class="user-icon">
-                        <img src="{{ asset('images/' . $post->user->icon_image) }}">
+                        <img class="rounded-circle" src="{{ Storage::url('images/' . ($post->user->icon_image ?? 'icon1.png')) }}">
                     </figure>
                     <div class="post-info">
                         <div class="post-name">{{ $post->user->username }}</div>
                         <div class="post">{{ $post->post }}</div>
                     </div>
-                    <div class="date">{{ $post->created_at }}</div>
+                    <div class="date">{{ $post->created_at->format('Y-m-d H:i') }}</div>
 
                     <!-- ログインユーザーの投稿にのみ編集・削除ボタンを表示 -->
                     @if($post->user_id === auth()->id())
@@ -57,7 +56,7 @@
     <div class="modal js-modal">
         <div class="modal__bg js-modal-close"></div>
         <div class="modal__content">
-            <form method="POST" action="{{ route('posts.update', $post->id) }}" id="modal-edit-form">
+            <form method="POST" action="" id="modal-edit-form">
                 @csrf
                 @method('PUT')
                 <div class="textarea-wrapper">
